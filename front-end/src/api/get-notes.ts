@@ -1,14 +1,17 @@
 import { api } from "./axios";
 
+interface RequestGetNotes {
+  roomId: string;
+}
 interface ResponseGetNotesBody {
   id: string;
   title: string;
-  position: string;
+  authorName: string;
   column: "done" | "backlog" | "doing" | "todo";
   createdAt: Date;
 }
 
-export const getNotes = async () => {
-  const res = await api.get<ResponseGetNotesBody[]>("/note/get-all");
+export const getNotes = async ({ roomId }: RequestGetNotes) => {
+  const res = await api.get<ResponseGetNotesBody[]>(`/note/get-all/${roomId}`);
   return res.data;
 };

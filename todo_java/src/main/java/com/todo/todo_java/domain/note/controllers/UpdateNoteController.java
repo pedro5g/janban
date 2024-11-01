@@ -5,7 +5,7 @@ import javax.naming.NameNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +16,7 @@ import com.todo.todo_java.domain.note.dtos.RequestUpdateNoteDTO;
 import com.todo.todo_java.domain.note.dtos.UpdateNoteServiceDTO;
 
 import com.todo.todo_java.domain.note.service.UpdateNoteService;
+import com.todo.todo_java.ws.MessageDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -23,7 +24,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/note")
 public class UpdateNoteController {
     @Autowired
-    UpdateNoteService UpdateNoteService;
+    UpdateNoteService updateNoteService;
+
+    @Autowired 
+    SimpMessagingTemplate simpMessagingTemplate;
 
 
     @PatchMapping("/{nodeId}")
@@ -31,7 +35,9 @@ public class UpdateNoteController {
          try {
             var authorId = request.getAttribute("userId").toString();
 
-            this.UpdateNoteService.execute(new UpdateNoteServiceDTO(authorId, noteId, requestUpdateNoteDTO.getTitle(), requestUpdateNoteDTO.getColumn()));
+            var result = this.updateNoteService.execute(new UpdateNoteServiceDTO(authorId, noteId, requestUpdateNoteDTO.getTitle(), requestUpdateNoteDTO.getColumn()));
+
+             simpMessagingTemplate.convertAndSend("/note/room/"+result.getKey(), new MessageDTO(result.getValue(), "updated"));
 
             return ResponseEntity.noContent().build();
         } catch (Exception e) {

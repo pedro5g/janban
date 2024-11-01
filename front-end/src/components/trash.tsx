@@ -1,13 +1,8 @@
 import { Flame, Trash as Trash1 } from "lucide-react";
 import { useState } from "react";
-import { NoteType } from "../types/notes-type";
 import { deleteNote } from "../api/delete-note";
 
-interface TrashProps {
-  setCards: React.Dispatch<React.SetStateAction<NoteType[]>>;
-}
-
-export const Trash = ({ setCards }: TrashProps) => {
+export const Trash = () => {
   const [active, setActive] = useState(false);
   function handleDragOver(e: React.DragEvent) {
     e.preventDefault();
@@ -21,10 +16,6 @@ export const Trash = ({ setCards }: TrashProps) => {
     try {
       const cardId = e.dataTransfer.getData("cardId");
       await deleteNote(cardId);
-      setCards((prev) => {
-        const rest = prev.filter((card) => card.id !== cardId);
-        return rest;
-      });
     } catch (e) {
       console.error(e);
     } finally {

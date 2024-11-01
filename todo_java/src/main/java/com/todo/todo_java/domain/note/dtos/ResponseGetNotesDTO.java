@@ -9,5 +9,6 @@ public class ResponseGetNotesDTO {
     private String id;
     private String title;
     private String column;
+    private String authorName;
     private String createdAt;
 }

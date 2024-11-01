@@ -10,4 +10,7 @@ public class CreateNoteDTO {
     
     @NotNull
     private String column;
+
+    @NotNull
+    private String roomId;
 }

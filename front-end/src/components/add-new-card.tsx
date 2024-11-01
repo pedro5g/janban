@@ -1,15 +1,14 @@
 import { LoaderCircle, Plus } from "lucide-react";
 import { useState } from "react";
-import { NoteType } from "../types/notes-type";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createNote } from "../api/create-note";
+import { useParams } from "react-router-dom";
 
 interface AddNewCardProps {
   column: "done" | "backlog" | "doing" | "todo";
-  setCards: React.Dispatch<React.SetStateAction<NoteType[]>>;
 }
 
 const newCardFormSchema = z.object({
@@ -18,11 +17,13 @@ const newCardFormSchema = z.object({
     .min(1, { message: "must not be empty" })
     .transform((text) => text.trim()),
   column: z.enum(["done", "backlog", "doing", "todo"]),
+  roomId: z.string().uuid(),
 });
 
 type NewCardFormSchema = z.infer<typeof newCardFormSchema>;
 
-export const AddNewCard = ({ column, setCards }: AddNewCardProps) => {
+export const AddNewCard = ({ column }: AddNewCardProps) => {
+  const { roomId } = useParams();
   const [adding, setAdding] = useState(false);
 
   const {
@@ -35,17 +36,17 @@ export const AddNewCard = ({ column, setCards }: AddNewCardProps) => {
     values: {
       title: "",
       column: column,
+      roomId: roomId ?? "",
     },
   });
 
   async function handleCreateNote(data: NewCardFormSchema) {
     try {
-      const res = await createNote(data);
-      setCards((prev) => [...prev, res]);
+      await createNote(data);
     } catch (e) {
       console.error(e);
     } finally {
-      reset({ title: "", column: column });
+      reset({ title: "", column: column, roomId: roomId ?? "" });
       setAdding(false);
     }
   }

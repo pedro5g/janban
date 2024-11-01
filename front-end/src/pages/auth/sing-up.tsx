@@ -8,14 +8,14 @@ import { z } from "zod";
 
 const registerFormSchema = z.object({
   name: z
-    .string({ message: "Por favor preencha com um nome" })
-    .min(3, { message: "O nome precisa ter no mínimo tres caracteres" }),
-  email: z.string().email({ message: "Email invalido" }),
+    .string({ message: "Please, give a name!" })
+    .min(3, { message: "The name must be to minimum 3 characters" }),
+  email: z.string().email({ message: "Invalid email" }),
   password: z
     .string()
-    .min(6, { message: "A senha deve ter no mínimo 6 caracteres" })
+    .min(6, { message: "Password must be to minimum 6 characters" })
     .max(100, {
-      message: "A senha deve ter no máximo 100 caracteres",
+      message: "Password must be to max 100 characters",
     }),
 });
 
@@ -41,7 +41,7 @@ export function SignUpPage() {
   const handlerRegister = async (data: RegisterFormSchema) => {
     try {
       await registerNewUser(data);
-      navigation("/app/sign-in");
+      navigation("/sign-in");
       reset({
         name: "",
         email: "",

@@ -36,7 +36,7 @@ export function SignIn() {
     try {
       const res = await login(data);
       setSession(res.access_token);
-      navigation("/", { viewTransition: true });
+      navigation("/wizard", { viewTransition: true });
       reset({
         email: "",
         password: "",

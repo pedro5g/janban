@@ -17,15 +17,20 @@ public class DeleteNoteService{
     NoteRepository noteRepository;
 
 
-    public void execute(DeleteNoteServiceDTO deleteNoteServiceDTO) throws NameNotFoundException, NotAllowedException {
+    public UUID execute(DeleteNoteServiceDTO deleteNoteServiceDTO) throws NameNotFoundException, NotAllowedException {
         var note = this.noteRepository.findById(UUID.fromString(deleteNoteServiceDTO.getNoteId())).orElseThrow(
             () -> new NameNotFoundException()
         );
 
-        if(!note.getAuthorId().equals(UUID.fromString(deleteNoteServiceDTO.getAuthorId()))){
-            throw new NotAllowedException();
-        }
+        // if(!note.getAuthorId().equals(UUID.fromString(deleteNoteServiceDTO.getAuthorId()))){
+        //     throw new NotAllowedException();
+        // }
+        var roomID = note.getRoomId();
 
         this.noteRepository.delete(note);
+        
+        
+        return roomID;
+
     }
 }

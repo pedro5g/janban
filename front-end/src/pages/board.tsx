@@ -4,14 +4,20 @@ import { NoteType } from "../types/notes-type";
 // import { DEV_DEFAULT_NOTES } from "../config/dev-default-notes";
 import { Trash } from "../components/trash";
 import { getNotes } from "../api/get-notes";
+import { useParams } from "react-router-dom";
+import { Stomp } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 
 export const Board = () => {
+  const { roomId } = useParams();
+
   const [cards, setCards] = useState<NoteType[]>([]);
 
   useEffect(() => {
     async function fetchData() {
+      if (!roomId) return;
       try {
-        const data = (await getNotes()) ?? [];
+        const data = (await getNotes({ roomId })) ?? [];
         setCards(data);
       } catch (e) {
         console.error(e);
@@ -19,6 +25,50 @@ export const Board = () => {
     }
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const client = Stomp.over(() => new SockJS("http://localhost:8080/ws"));
+    client.connect({}, () => {
+      console.log("STOMP connected");
+
+      client.subscribe(`/note/room/${roomId}`, (message) => {
+        const annotation = JSON.parse(message.body);
+        console.log("Recebeu anotação:", annotation);
+
+        switch (annotation.type) {
+          case "created":
+            setCards((prev) => {
+              return [...prev, annotation.data];
+            });
+            break;
+          case "deleted":
+            setCards((prev) => {
+              const cards = prev.filter((c) => c.id !== annotation.data);
+              return cards;
+            });
+            break;
+          case "updated":
+            setCards((prev) => {
+              const cards = prev.map((c) => {
+                if (c.id === annotation.data.id) {
+                  return annotation.data;
+                }
+                return c;
+              });
+
+              return cards;
+            });
+            break;
+          default:
+            break;
+        }
+      });
+    });
+
+    return () => {
+      if (client) client.disconnect();
+    };
   }, []);
 
   return (
@@ -51,7 +101,7 @@ export const Board = () => {
         cards={cards}
         setCards={setCards}
       />
-      <Trash setCards={setCards} />
+      <Trash />
     </section>
   );
 };

@@ -17,6 +17,13 @@ public class NoteRepository extends Repository<Note>{
         .toList();
     }
 
+    public List<Note> findByRoomId(UUID roomId) {
+        return this.itens
+        .stream()
+        .filter((item) -> item.getRoomId().equals(roomId))
+        .toList();
+    }
+
     public void updateAll(List<Note> currentItems) {
         
         for(Note i : this.itens){   

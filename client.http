@@ -76,5 +76,26 @@ GET  {{baseURL}}/note/get-all
 Authorization: Bearer {{token}}
 
 
+### 
+
+# @name CreateRoom
+POST {{baseURL}}/room/create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "roomName": "sala de serviço"
+}
 
 
+###
+
+# @name GetRoomInfo
+GET {{baseURL}}/room/info/e58f632a-4312-4826-8499-1156f5432c73
+Authorization: Bearer {{token}}
+
+###
+
+# @name DeleteRoom
+DELETE {{baseURL}}/room/e58f632a-4312-4826-8499-1156f5432c73
+Authorization: Bearer {{token}}

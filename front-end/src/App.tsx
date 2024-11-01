@@ -4,6 +4,7 @@ import { SignIn } from "./pages/auth/sign-in";
 import { SignUpPage } from "./pages/auth/sing-up";
 import { AppLayout } from "./pages/_layouts/app-layout";
 import { RootLayout } from "./pages/_layouts/root-layout";
+import { WizardPage } from "./pages/wizard";
 
 const routes = createBrowserRouter(
   [
@@ -16,8 +17,12 @@ const routes = createBrowserRouter(
           element: <AppLayout />,
           children: [
             {
-              path: "/",
+              path: "/board/:roomId",
               element: <Board />,
+            },
+            {
+              path: "/wizard",
+              element: <WizardPage />,
             },
           ],
         },
@@ -42,11 +47,11 @@ const routes = createBrowserRouter(
         a.click();
       }
 
-      const paths = ["/app", "/sign-up", "/sign-in"];
+      // const paths = ["/app", "/sign-up", "/sign-in"];
 
-      if (!paths.includes(opts.path)) {
-        a.click();
-      }
+      // if (!paths.includes(opts.path)) {
+      //   a.click();
+      // }
     },
   }
 );

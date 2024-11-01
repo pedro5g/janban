@@ -18,6 +18,7 @@ type User = {
 interface AuthContentProps {
   setSession: (toke: string) => void;
   getUser: () => User | null;
+  getToken: () => string;
   signOut: () => void;
 }
 
@@ -95,6 +96,10 @@ export const AuthProvider = ({
     return user;
   };
 
+  const getToken = () => {
+    return token;
+  };
+
   const setSession = (token: string) => {
     setToken(() => {
       salveAccessToken(token);
@@ -114,6 +119,7 @@ export const AuthProvider = ({
   return (
     <AuthContent.Provider
       value={{
+        getToken,
         getUser,
         setSession,
         signOut,

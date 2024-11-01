@@ -147,12 +147,13 @@ export const Column = ({
               id={card.id}
               title={card.title}
               column={card.column}
+              authorName={card.authorName}
               handleDragStart={handleDragStart}
             />
           );
         })}
         <DropIndicator beforeId={"-1"} column={column} />
-        <AddNewCard setCards={setCards} column={column} />
+        <AddNewCard column={column} />
       </div>
     </div>
   );
