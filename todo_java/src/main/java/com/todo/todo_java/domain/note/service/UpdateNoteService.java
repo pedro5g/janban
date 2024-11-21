@@ -40,10 +40,11 @@ public class UpdateNoteService {
 
         note.setTitle(updateNoteServiceDTO.getTitle());
         note.setColumn(updateNoteServiceDTO.getColumn());
+        note.setPosition(updateNoteServiceDTO.getPosition());
 
         this.noteRepository.update(note);
 
-        var result = new ResponseGetNotesDTO(note.getId().toString(), note.getTitle(), note.getColumn(), author.getName() ,note.getCreatedAt().toString());
+        var result = new ResponseGetNotesDTO(note.getId().toString(), note.getTitle(), note.getColumn(), note.getPosition(),author.getName() ,note.getCreatedAt().toString());
 
         AbstractMap.SimpleEntry<String, ResponseGetNotesDTO> tupla = new AbstractMap.SimpleEntry<>(note.getRoomId().toString(), result);
 

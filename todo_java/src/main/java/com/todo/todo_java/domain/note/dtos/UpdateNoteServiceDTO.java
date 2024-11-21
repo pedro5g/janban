@@ -10,4 +10,5 @@ public class UpdateNoteServiceDTO {
     private String noteId;
     private String title;
     private String column;
+    private int position;
 }

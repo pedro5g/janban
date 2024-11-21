@@ -5,6 +5,7 @@ interface CardProps {
   id: string;
   title: string;
   column: "done" | "backlog" | "doing" | "todo";
+  position: number;
   authorName: string;
   handleDragStart: (e: React.DragEvent, card: NoteType) => void;
 }
@@ -14,6 +15,7 @@ export const Card = ({
   title,
   column,
   authorName,
+  position,
   handleDragStart,
 }: CardProps) => {
   return (
@@ -29,6 +31,7 @@ export const Card = ({
             column,
             title,
             authorName,
+            position,
           })
         }
         className=" relative cursor-grab rounded border-2 border-zinc-700 bg-zinc-800 p-3 active:cursor-grabbing">

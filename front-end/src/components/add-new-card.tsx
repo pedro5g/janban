@@ -12,10 +12,7 @@ interface AddNewCardProps {
 }
 
 const newCardFormSchema = z.object({
-  title: z
-    .string()
-    .min(1, { message: "must not be empty" })
-    .transform((text) => text.trim()),
+  title: z.string().trim().min(1, { message: "must not be empty" }),
   column: z.enum(["done", "backlog", "doing", "todo"]),
   roomId: z.string().uuid(),
 });
@@ -59,8 +56,9 @@ export const AddNewCard = ({ column }: AddNewCardProps) => {
             <textarea
               {...register("title", { required: true })}
               placeholder="Add new task..."
+              autoFocus={true}
               className="w-full rounded border-2 text-zinc-50 border-violet-400 bg-violet-400/20 p-3 text-sm 
-              placeholder-violet-300 focus:outline-0 overflow-y-hidden"
+              placeholder-violet-300 focus:outline-0 overflow-y-hidden invalid:border-red-400 invalid:bg-red-400/20"
             />
             <div className="mt-1.5 flex items-center justify-end gap-1.5">
               <button

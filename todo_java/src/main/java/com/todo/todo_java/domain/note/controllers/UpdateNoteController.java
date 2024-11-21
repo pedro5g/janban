@@ -35,7 +35,7 @@ public class UpdateNoteController {
          try {
             var authorId = request.getAttribute("userId").toString();
 
-            var result = this.updateNoteService.execute(new UpdateNoteServiceDTO(authorId, noteId, requestUpdateNoteDTO.getTitle(), requestUpdateNoteDTO.getColumn()));
+            var result = this.updateNoteService.execute(new UpdateNoteServiceDTO(authorId, noteId, requestUpdateNoteDTO.getTitle(), requestUpdateNoteDTO.getColumn(), requestUpdateNoteDTO.getPosition()));
 
              simpMessagingTemplate.convertAndSend("/note/room/"+result.getKey(), new MessageDTO(result.getValue(), "updated"));
 

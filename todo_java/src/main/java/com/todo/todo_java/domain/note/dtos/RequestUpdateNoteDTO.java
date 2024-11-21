@@ -15,4 +15,6 @@ public class RequestUpdateNoteDTO {
     @NotNull
     @NotEmpty
     private String column;
+
+    private int position;
 }

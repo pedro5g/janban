@@ -31,26 +31,43 @@ export const Header = () => {
         url: `http://localhost:8080/app/board/${roomData?.roomId}`,
       });
     }
+
+    alert("Sorry, but your browser doesn't support this feature");
+  }
+
+  function handleCopy() {
+    if (!roomData?.roomId) return;
+    navigator.clipboard.writeText(roomData.roomId);
   }
 
   return (
     <header className="w-full h-15 fixed top-0 z-20 border-b-2 border-zinc-800 shadow-md">
       <div className="w-full h-full px-5 py-2 flex items-center justify-between">
-        <h1 className="text-3xl text-white font-bold w-2/4">
+        <h1 className="text-base sm:text-xl md:text-3xl text-white font-bold w-2/4">
           Hello, {userName?.name} 👋
         </h1>
         {roomId ? (
-          <div className="text-center w-full">
-            <p className=" text-white uppercase">{roomData?.roomName}</p>
-            <span className="text-gray-400 text-sm cursor-pointer inline-flex gap-2 items-center">
+          <div className="text-center w-full ">
+            <p className=" text-sm md:text-base text-white uppercase">
+              {roomData?.roomName}
+            </p>
+            <span
+              title="copy room id"
+              className="text-gray-400 text-xs md:text-sm cursor-pointer "
+              onClick={handleCopy}>
               {roomData?.roomId}
-              <span onClick={handleShared}>
+            </span>
+            <div className="inline-flex gap-2 items-center ml-2 text-xs md:text-sm">
+              <span
+                title="share room"
+                className="text-gray-400 cursor-pointer"
+                onClick={handleShared}>
                 <Share2 size={14} />
               </span>
-              <span onClick={() => navigate("/wizard")}>
-                <DoorOpen size={14} className="text-red-500" />
+              <span title="leave room" onClick={() => navigate("/wizard")}>
+                <DoorOpen size={14} className="text-red-500 cursor-pointer" />
               </span>
-            </span>
+            </div>
           </div>
         ) : null}
         <div className=" w-2/4 flex justify-end">

@@ -8,8 +8,8 @@ import { login } from "../../api/login";
 import { useAuth } from "../../providers/auth-provider";
 
 const loginFormSchema = z.object({
-  email: z.string().min(1),
-  password: z.string().min(1),
+  email: z.string().trim().min(1),
+  password: z.string().trim().min(1),
 });
 
 type LoginFormSchema = z.infer<typeof loginFormSchema>;

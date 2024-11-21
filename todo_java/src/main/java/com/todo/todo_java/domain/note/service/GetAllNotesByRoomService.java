@@ -35,7 +35,7 @@ public class GetAllNotesByRoomService {
         
         this.noteRepository.findByRoomId(UUID.fromString(roodId)).forEach((e) -> { 
           String authorName = this.getAuthorName(e.getAuthorId());
-          var format =  new ResponseGetNotesDTO(e.getId().toString(), e.getTitle(), e.getColumn(), authorName,e.getCreatedAt().toString());
+          var format =  new ResponseGetNotesDTO(e.getId().toString(), e.getTitle(), e.getColumn(), e.getPosition(),authorName,e.getCreatedAt().toString());
             dto.add(format);
         });
 

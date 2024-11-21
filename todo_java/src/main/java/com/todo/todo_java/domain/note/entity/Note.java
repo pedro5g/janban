@@ -30,10 +30,13 @@ public class Note extends Entity {
     @Setter
     private UUID authorId;
 
-
     @Getter
     @Setter
     private UUID roomId;
+
+    @Getter
+    @Setter
+    private int position;
 
     @Getter
     private LocalDateTime updatedAt;

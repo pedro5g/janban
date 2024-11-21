@@ -36,6 +36,7 @@ public class CreateNoteController {
             Note note = Note.builder()
             .authorId(UUID.fromString(authorId))
             .roomId(UUID.fromString(createNoteDTO.getRoomId()))
+            .position(0)
             .title(createNoteDTO.getTitle())
             .column(createNoteDTO.getColumn())
             .build();

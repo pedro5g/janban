@@ -10,16 +10,9 @@ interface ColumnProps {
   headingColor: string;
   column: "done" | "backlog" | "doing" | "todo";
   cards: NoteType[];
-  setCards: React.Dispatch<React.SetStateAction<NoteType[]>>;
 }
 
-export const Column = ({
-  title,
-  headingColor,
-  column,
-  cards,
-  setCards,
-}: ColumnProps) => {
+export const Column = ({ title, headingColor, column, cards }: ColumnProps) => {
   const [active, setActive] = useState(false);
   const indicatorsRef = useRef<HTMLElement[]>([]);
 
@@ -100,23 +93,21 @@ export const Column = ({
       let cardToTransfer = copy.find((c) => c.id === cardId);
 
       if (!cardToTransfer) return;
-      cardToTransfer = { ...cardToTransfer, column };
 
-      copy = copy.filter((c) => c.id !== cardId);
+      cardToTransfer = { ...cardToTransfer, column };
 
       const moveToBack = before === "-1";
 
       if (moveToBack) {
-        copy.push(cardToTransfer);
+        cardToTransfer.position = -1;
       } else {
         const insertAtIndex = copy.findIndex((el) => el.id === before);
         if (insertAtIndex < 0) return;
-        copy.splice(insertAtIndex, 0, cardToTransfer);
+        cardToTransfer.position = insertAtIndex;
       }
 
       try {
         await updateNote(cardToTransfer);
-        setCards(copy);
       } catch (e) {
         console.error(e);
       }
@@ -148,6 +139,7 @@ export const Column = ({
               title={card.title}
               column={card.column}
               authorName={card.authorName}
+              position={card.position}
               handleDragStart={handleDragStart}
             />
           );

@@ -36,7 +36,7 @@ public class CreateNoteService {
 
         this.repository.create(note);
 
-        return new ResponseGetNotesDTO(note.getId().toString(), note.getTitle(), note.getColumn(), author.getName(),note.getCreatedAt().toString());
+        return new ResponseGetNotesDTO(note.getId().toString(), note.getTitle(), note.getColumn(), note.getPosition(), author.getName(),note.getCreatedAt().toString());
     }
     
 }

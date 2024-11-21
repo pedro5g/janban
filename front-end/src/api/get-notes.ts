@@ -7,6 +7,7 @@ interface ResponseGetNotesBody {
   id: string;
   title: string;
   authorName: string;
+  position: number;
   column: "done" | "backlog" | "doing" | "todo";
   createdAt: Date;
 }

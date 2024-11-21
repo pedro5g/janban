@@ -30,7 +30,7 @@ public class GetAllNotesService {
 
         List<ResponseGetNotesDTO> dto = new ArrayList<>();
         this.repository.findByAuthorId(id).forEach((e) -> { 
-          var format =  new ResponseGetNotesDTO(e.getId().toString(), e.getTitle(), e.getColumn(), author.getName() ,e.getCreatedAt().toString());
+          var format =  new ResponseGetNotesDTO(e.getId().toString(), e.getTitle(), e.getColumn(), e.getPosition(),author.getName() ,e.getCreatedAt().toString());
             dto.add(format);
         });
 

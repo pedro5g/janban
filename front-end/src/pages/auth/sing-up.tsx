@@ -9,10 +9,12 @@ import { z } from "zod";
 const registerFormSchema = z.object({
   name: z
     .string({ message: "Please, give a name!" })
+    .trim()
     .min(3, { message: "The name must be to minimum 3 characters" }),
-  email: z.string().email({ message: "Invalid email" }),
+  email: z.string().trim().email({ message: "Invalid email" }),
   password: z
     .string()
+    .trim()
     .min(6, { message: "Password must be to minimum 6 characters" })
     .max(100, {
       message: "Password must be to max 100 characters",
@@ -25,6 +27,7 @@ export function SignUpPage() {
   const navigation = useNavigate();
 
   const {
+    setError,
     reset,
     register,
     formState: { errors, isLoading },
@@ -48,7 +51,7 @@ export function SignUpPage() {
         password: "",
       });
     } catch (e) {
-      console.error(e);
+      setError("email", { message: "Email already exists" });
     }
   };
 
@@ -60,19 +63,19 @@ export function SignUpPage() {
           onSubmit={handleSubmit(handlerRegister)}
           className="w-full space-y-4 mt-4">
           <Input
-            {...register("name")}
+            {...register("name", { required: true })}
             message={errors["name"]?.message}
             placeholder="Name"
             type="text"
           />
           <Input
-            {...register("email")}
+            {...register("email", { required: true })}
             message={errors["email"]?.message}
             placeholder="Email"
             type="text"
           />
           <Input
-            {...register("password")}
+            {...register("password", { required: true })}
             message={errors["password"]?.message}
             placeholder="Password"
             type="password"
