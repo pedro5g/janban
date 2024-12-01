@@ -139,6 +139,4 @@ Embora o sistema atual seja simples, a introdução de autenticação pode melho
 - **Login e Registro de Usuários**: Implementar autenticação usando JWT ou OAuth2.
 - **Permissões por Sala**: Controlar quais usuários podem editar, excluir ou convidar outros participantes para uma sala.
 
----
 
-Essas melhorias e novas funcionalidades tornarão o projeto mais robusto e oferecerão uma experiência de usuário mais rica e completa. A modularidade e organização do código atual facilitarão a implementação dessas mudanças no futuro.
