@@ -9,22 +9,22 @@ import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.domain.note.dtos.ResponseGetNotesDTO;
 import com.todo.todo_java.domain.note.entity.Note;
-import com.todo.todo_java.domain.note.repository.NoteRepository;
-import com.todo.todo_java.domain.room.repository.RoomRepository;
-import com.todo.todo_java.domain.user.repository.UserRepository;
+import com.todo.todo_java.domain.note.repository.INoteRepository;
+import com.todo.todo_java.domain.room.repository.IRoomRepository;
+import com.todo.todo_java.domain.user.repository.IUserRepository;
 
 @Service
 public class CreateNoteService {
 
     @Autowired 
-    NoteRepository repository;
+    INoteRepository repository;
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
 
     @Autowired
-    RoomRepository roomRepository;
+    IRoomRepository roomRepository;
 
     public ResponseGetNotesDTO execute(Note note) throws NameNotFoundException{
         this.roomRepository.findById(note.getRoomId()).orElseThrow(

@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.core.exception.NotAllowedException;
 import com.todo.todo_java.domain.room.dtos.DeleteRoomServiceDTO;
-import com.todo.todo_java.domain.room.repository.RoomRepository;
+import com.todo.todo_java.domain.room.repository.IRoomRepository;
+
 
 @Service
 public class DeleteRoomService {
     
     @Autowired
-    private RoomRepository roomRepository;
+    private IRoomRepository roomRepository;
 
     public void execute(DeleteRoomServiceDTO deleteRoomServicedDto) throws NameNotFoundException, NotAllowedException {
         var room = this.roomRepository.findById(UUID.fromString(deleteRoomServicedDto.getRoodId()))

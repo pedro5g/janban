@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.todo.todo_java.core.entities.Entity;
 
-public abstract class Repository<T extends Entity> {
+public abstract class Repository<T extends Entity> implements IBaseRepository<T> {
     protected ArrayList<T> itens = new ArrayList<>();
 
     public void create(T entity) {

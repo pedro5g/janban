@@ -10,20 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.domain.note.dtos.ResponseGetNotesDTO;
-import com.todo.todo_java.domain.note.repository.NoteRepository;
-import com.todo.todo_java.domain.room.repository.RoomRepository;
-import com.todo.todo_java.domain.user.repository.UserRepository;
+import com.todo.todo_java.domain.note.repository.INoteRepository;
+import com.todo.todo_java.domain.room.repository.IRoomRepository;
+import com.todo.todo_java.domain.user.repository.IUserRepository;
 
 @Service
 public class GetAllNotesByRoomService {
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     @Autowired
-    RoomRepository roomRepository;
+    IRoomRepository roomRepository;
 
     @Autowired
-    NoteRepository noteRepository;
+    INoteRepository noteRepository;
 
     public List<ResponseGetNotesDTO> execute(String roodId) throws NameNotFoundException{
 

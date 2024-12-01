@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRepository extends Repository<User> {
+public class UserRepository extends Repository<User> implements IUserRepository{
     public Optional<User> findByEmail(String email) {
         return this.itens
         .stream()

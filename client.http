@@ -9,7 +9,7 @@ POST {{baseURL}}/user/register
 Content-Type: application/json
 
 {
-    "name": "pedro",
+    "name": "test",
     "email": "test@example.com",
     "password": "123456"
 }
@@ -44,7 +44,8 @@ Authorization: Bearer {{token}}
 
 {
     "title": "test",
-    "column": "in-progress"
+    "column": "in-progress",
+    "roomId": "32422c11-9640-4ee8-ba1e-0ed350a8df88"
 }
 
 

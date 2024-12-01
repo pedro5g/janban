@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.domain.user.dtos.ResponseUserProfileDTO;
-import com.todo.todo_java.domain.user.repository.UserRepository;
+import com.todo.todo_java.domain.user.repository.IUserRepository;
+
 
 import javax.naming.NameNotFoundException;
 
@@ -14,7 +15,7 @@ public class GetUserProfileService {
     
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     public ResponseUserProfileDTO execute(String userId) throws NameNotFoundException {
         var user = this.userRepository.findById(UUID.fromString(userId)).orElseThrow(

@@ -7,15 +7,16 @@ import org.springframework.stereotype.Service;
 import com.todo.todo_java.core.providers.JWTProvider;
 import com.todo.todo_java.domain.user.dtos.AuthenticateUserDTO;
 import com.todo.todo_java.domain.user.dtos.UserAuthenticatedResponseDTO;
-import com.todo.todo_java.domain.user.repository.UserRepository;
+import com.todo.todo_java.domain.user.repository.IUserRepository;
+
 
 import javax.naming.AuthenticationException;
 
 @Service
 public class AuthenticateUserService {
 
-    @Autowired
-    UserRepository repository;
+    @Autowired()
+    IUserRepository repository;
 
     @Autowired
     PasswordEncoder passwordEncoder;

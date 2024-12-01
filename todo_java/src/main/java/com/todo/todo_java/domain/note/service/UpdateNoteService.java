@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
 import com.todo.todo_java.core.exception.NotAllowedException;
 import com.todo.todo_java.domain.note.dtos.ResponseGetNotesDTO;
 import com.todo.todo_java.domain.note.dtos.UpdateNoteServiceDTO;
-import com.todo.todo_java.domain.note.repository.NoteRepository;
-import com.todo.todo_java.domain.user.repository.UserRepository;
+import com.todo.todo_java.domain.note.repository.INoteRepository;
+import com.todo.todo_java.domain.user.repository.IUserRepository;
 
 @Service
 public class UpdateNoteService {
     @Autowired
-    NoteRepository noteRepository;
+    INoteRepository noteRepository;
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
 
       public AbstractMap.SimpleEntry<String, ResponseGetNotesDTO> execute(UpdateNoteServiceDTO updateNoteServiceDTO) throws NameNotFoundException, NotAllowedException {

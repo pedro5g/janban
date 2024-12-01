@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.core.exception.NotAllowedException;
 import com.todo.todo_java.domain.note.dtos.DeleteNoteServiceDTO;
-import com.todo.todo_java.domain.note.repository.NoteRepository;
+import com.todo.todo_java.domain.note.repository.INoteRepository;
+
 
 @Service
 public class DeleteNoteService{
     @Autowired
-    NoteRepository noteRepository;
+    INoteRepository noteRepository;
 
 
     public UUID execute(DeleteNoteServiceDTO deleteNoteServiceDTO) throws NameNotFoundException, NotAllowedException {

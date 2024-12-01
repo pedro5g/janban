@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.core.exception.ConflictException;
 import com.todo.todo_java.domain.user.entity.User;
-import com.todo.todo_java.domain.user.repository.UserRepository;
+import com.todo.todo_java.domain.user.repository.IUserRepository;
+
 
 @Service
 public class CreateUserService {
     
     @Autowired
-    private UserRepository repository;
+    private IUserRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

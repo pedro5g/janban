@@ -5,13 +5,14 @@ import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.domain.room.dtos.ResponseCreateRoomDTO;
 import com.todo.todo_java.domain.room.entity.Room;
-import com.todo.todo_java.domain.room.repository.RoomRepository;
+import com.todo.todo_java.domain.room.repository.IRoomRepository;
+
 
 @Service
 public class CreateRoomService {
 
     @Autowired
-    private RoomRepository roomRepository;
+    private IRoomRepository roomRepository;
 
 
     public ResponseCreateRoomDTO execute(Room room) {

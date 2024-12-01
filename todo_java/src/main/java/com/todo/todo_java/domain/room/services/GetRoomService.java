@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todo.todo_java.domain.room.dtos.ResponseCreateRoomDTO;
-import com.todo.todo_java.domain.room.repository.RoomRepository;
+import com.todo.todo_java.domain.room.repository.IRoomRepository;
 
 @Service
 public class GetRoomService {
     @Autowired
-    private RoomRepository roomRepository;
+    private IRoomRepository roomRepository;
 
 
     public ResponseCreateRoomDTO execute(String roomId) throws NameNotFoundException{

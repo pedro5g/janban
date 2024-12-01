@@ -9,7 +9,7 @@ import com.todo.todo_java.core.repository.Repository;
 import com.todo.todo_java.domain.note.entity.Note;
 
 @Service
-public class NoteRepository extends Repository<Note>{
+public class NoteRepository extends Repository<Note> implements INoteRepository {
     public List<Note> findByAuthorId(UUID authorId){
         return this.itens
         .stream()
@@ -35,7 +35,7 @@ public class NoteRepository extends Repository<Note>{
         }
     }
 
-    private boolean compareContent(Note a, Note b) {
+    public boolean compareContent(Note a, Note b) {
         return a.getColumn().equals(b.getColumn());
     }
 
